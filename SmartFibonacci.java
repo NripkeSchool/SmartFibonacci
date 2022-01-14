@@ -2,27 +2,31 @@ import java.util.*;
 
 public class SmartFibonacci
 {
-    static ArrayList<Integer> values = new ArrayList<Integer>();
     static int maxSize;
+    static long[] values;
     public static void main(String[] args)
     {
-        //for(int i = 0; i < 10; i++)
-        //{
-        //    System.out.println(fibonacci(i+1) + " ");
-        //}
-        maxSize = 10;
+        long start = System.nanoTime();
+        maxSize = 1000;
+        values = new long[maxSize];
         System.out.println(fibonacci(maxSize));
+        long end = System.nanoTime();
+        System.out.println((end-start)/1000000000);
     }
     
-    public static int fibonacci(int index)
+    public static long fibonacci(int index)
     {
         if (index <= 2)
         {
            return 1;   
         }
-
-        values.add(0, fibonacci(index-1)+fibonacci(index-2));
-        return values.get(0);
+        if (values[index-1] != 0)
+        {
+            return values[index-1];
+        }
+        values[index-1] = fibonacci(index-1)+fibonacci(index-2);
+        
+        return values[index-1];
     }
     
     
